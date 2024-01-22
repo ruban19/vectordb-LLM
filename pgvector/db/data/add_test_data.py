@@ -1,4 +1,4 @@
-from pgvector import BASE_DIR  # simply because we need to load .env
+from pgvector import BASE_DIR
 from pgvector.db.connect import create_db_connection
 
 import os
@@ -8,7 +8,6 @@ from langchain.embeddings import HuggingFaceHubEmbeddings
 
 
 if __name__ == '__main__':
-    print(os.getenv('EMBEDDING_MODEL'))
     # Write five example sentences that will be converted to embeddings
     texts = [
         "I like to eat broccoli and bananas.",
@@ -17,19 +16,19 @@ if __name__ == '__main__':
         "My sister adopted a kitten yesterday.",
         "Look at this cute hamster munching on a piece of broccoli.",
     ]
-    print(texts)
-    # openai.api_key = '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'
+    # print(texts)
+    # print('len of texts', len(texts))
     embeddings = HuggingFaceHubEmbeddings(
         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
     )
-    # embeddings = get_embeddings(texts, os.getenv('EMBEDDING_MODEL'))
     embeddings_list = embeddings.embed_documents(texts)
-    print(embeddings_list)
+    # print(embeddings_list)
+    # print('len of embeddings_list', len(embeddings_list))
     # Write text and embeddings to database
     connection = create_db_connection()
     cursor = connection.cursor()
     try:
-        for text, embedding in zip(texts, embeddings):
+        for text, embedding in zip(texts, embeddings_list):
             cursor.execute(
                 "INSERT INTO embeddings (embedding, text) VALUES (%s, %s)",
                 (embedding, text)

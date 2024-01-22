@@ -1,4 +1,4 @@
 psycopg2-binary
-langchain
+langchain-community
 python-dotenv~=1.0.0
 huggingface_hub

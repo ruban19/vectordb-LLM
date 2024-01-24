@@ -7,7 +7,7 @@ from langchain.embeddings import HuggingFaceHubEmbeddings
 if __name__ == '__main__':
     # This script is used to test the embedding model, and the
     # cosine similarity function within the database.
-    text = "What colour is banana ? "
+    text = "What colour is banana ?"
     embeddings = HuggingFaceHubEmbeddings(
         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
     )

@@ -16,14 +16,10 @@ if __name__ == '__main__':
         "My sister adopted a kitten yesterday.",
         "Look at this cute hamster munching on a piece of broccoli.",
     ]
-    # print(texts)
-    # print('len of texts', len(texts))
     embeddings = HuggingFaceHubEmbeddings(
         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
     )
     embeddings_list = embeddings.embed_documents(texts)
-    # print(embeddings_list)
-    # print('len of embeddings_list', len(embeddings_list))
     # Write text and embeddings to database
     connection = create_db_connection()
     cursor = connection.cursor()
